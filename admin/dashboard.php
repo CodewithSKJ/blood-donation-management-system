@@ -1,45 +1,62 @@
 <?php
 session_start();
 include("../includes/config.php");
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-// CHECK ADMIN
 if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "admin"){
     header("Location: ../auth/login.php");
     exit();
 }
+
+// STATS
+$totalReq = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) as total FROM blood_requests"))['total'];
+$pendingReq = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) as total FROM blood_requests WHERE status='pending'"))['total'];
+$acceptedReq = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) as total FROM blood_requests WHERE status='accepted'"))['total'];
+$totalDonations = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) as total FROM donations"))['total'];
 ?>
 
-<h1>Admin Dashboard 🧑‍💼</h1>
+<div class="container mt-4">
 
-<hr>
+<h2 class="text-center mb-4">🧑‍💼 Admin Dashboard</h2>
 
-<?php
-// TOTAL REQUESTS
-$totalReq = mysqli_query($conn, "SELECT COUNT(*) as total FROM blood_requests");
-$totalReq = mysqli_fetch_assoc($totalReq)['total'];
+<div class="row">
 
-// PENDING REQUESTS
-$pendingReq = mysqli_query($conn, "SELECT COUNT(*) as total FROM blood_requests WHERE status='pending'");
-$pendingReq = mysqli_fetch_assoc($pendingReq)['total'];
+<div class="col-md-3">
+<div class="card text-bg-primary mb-3">
+<div class="card-body">
+<h5>Total Requests</h5>
+<h3><?php echo $totalReq; ?></h3>
+</div>
+</div>
+</div>
 
-// ACCEPTED REQUESTS
-$acceptedReq = mysqli_query($conn, "SELECT COUNT(*) as total FROM blood_requests WHERE status='accepted'");
-$acceptedReq = mysqli_fetch_assoc($acceptedReq)['total'];
+<div class="col-md-3">
+<div class="card text-bg-warning mb-3">
+<div class="card-body">
+<h5>Pending</h5>
+<h3><?php echo $pendingReq; ?></h3>
+</div>
+</div>
+</div>
 
-// TOTAL DONATIONS
-$totalDonations = mysqli_query($conn, "SELECT COUNT(*) as total FROM donations");
-$totalDonations = mysqli_fetch_assoc($totalDonations)['total'];
-?>
+<div class="col-md-3">
+<div class="card text-bg-success mb-3">
+<div class="card-body">
+<h5>Accepted</h5>
+<h3><?php echo $acceptedReq; ?></h3>
+</div>
+</div>
+</div>
 
-<h2>System Overview</h2>
+<div class="col-md-3">
+<div class="card text-bg-danger mb-3">
+<div class="card-body">
+<h5>Donations</h5>
+<h3><?php echo $totalDonations; ?></h3>
+</div>
+</div>
+</div>
 
-<ul>
-    <li>Total Requests: <?php echo $totalReq; ?></li>
-    <li>Pending Requests: <?php echo $pendingReq; ?></li>
-    <li>Accepted Requests: <?php echo $acceptedReq; ?></li>
-    <li>Total Donations: <?php echo $totalDonations; ?></li>
-</ul>
+</div>
 
-<hr>
-
-<a href="../auth/logout.php">Logout</a>
+</div>
