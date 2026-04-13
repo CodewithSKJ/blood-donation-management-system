@@ -1,8 +1,8 @@
-<?php
+<?php 
 session_start();
-include("../includes/config.php");
-
-if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "donor"){
+include("../includes/auth_check.php");
+include("../includes/sidebar.php");
+if($_SESSION['user']['role'] != "donor"){
     header("Location: ../auth/login.php");
     exit();
 }
