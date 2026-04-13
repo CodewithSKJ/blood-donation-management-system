@@ -36,12 +36,16 @@ $result = mysqli_query($conn, $sql);
     <td><?php echo $row['status']; ?></td>
 
     <td>
-        <?php if($row['status'] == "pending") { ?>
-            <a href="accept_request.php?id=<?php echo $row['id']; ?>">
-                Accept
-            </a>
-        <?php } ?>
-    </td>
+    <?php if($row['status'] == "pending"){ ?>
+        <a href="accept_request.php?id=<?php echo $row['id']; ?>">
+            Accept
+        </a>
+        |
+        <a href="reject_request.php?id=<?php echo $row['id']; ?>">
+            Reject
+        </a>
+    <?php } ?>
+</td>
 </tr>
 <?php } ?>
 
