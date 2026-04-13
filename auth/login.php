@@ -5,10 +5,12 @@ include("../includes/config.php");
 if(isset($_POST['login'])){
 
 $email = $_POST['email'];
-$password = md5($_POST['password']);
+if(password_verify($password, $row['password']))
 
-$sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
-$result = mysqli_query($conn,$sql);
+$stmt = $conn->prepare("SELECT * FROM users WHERE email=?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
 
 $user = mysqli_fetch_assoc($result);
 
