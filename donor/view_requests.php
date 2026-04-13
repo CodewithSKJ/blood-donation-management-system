@@ -2,14 +2,30 @@
 session_start();
 include("../includes/config.php");
 
+<form method="GET">
+    <input type="text" name="blood_group" placeholder="Enter Blood Group (A+, O+, etc)">
+    <button type="submit">Search</button>
+</form>
 // SECURITY CHECK
 if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "donor"){
     header("Location: ../auth/login.php");
     exit();
 }
-
 // FETCH PENDING REQUESTS
-$sql = "SELECT * FROM blood_requests WHERE status='pending'";
+$blood_group = "";
+
+if(isset($_GET['blood_group'])){
+    $blood_group = $_GET['blood_group'];
+}
+
+if($blood_group != ""){
+    $sql = "SELECT * FROM blood_requests 
+            WHERE status='pending' 
+            AND blood_group='$blood_group'";
+} else {
+    $sql = "SELECT * FROM blood_requests 
+            WHERE status='pending'";
+}
 $result = mysqli_query($conn, $sql);
 ?>
 
