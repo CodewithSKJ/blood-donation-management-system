@@ -40,6 +40,14 @@ SET units = units - $units
 WHERE blood_group='$blood_group'";
 mysqli_query($conn, $updateStock);
 
+/* INSERT DONATION RECORD */
+$insertDonation = "INSERT INTO donations 
+(donor_id, request_id, blood_group, units, donation_date)
+VALUES 
+('$donor_id', '$request_id', '$blood_group', '$units', NOW())";
+
+mysqli_query($conn, $insertDonation);
+
 header("Location: view_requests.php");
 exit();
 ?>
