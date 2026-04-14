@@ -1,8 +1,10 @@
 <?php
-session_start();
+if(session_status() == PHP_SESSION_NONE){
+    session_start();
+}
 
 if(!isset($_SESSION['user'])){
-    header("Location: ../auth/login.php");
+    header("Location: /blood-donation-management-system/auth/login.php");
     exit();
 }
 
@@ -16,21 +18,26 @@ $role = $user['role'];
 
 <h2 style="text-align:center;">🩸 Blood Bank</h2>
 
-<a href="#">Dashboard</a>
+<a href="/blood-donation-management-system/<?php echo $role; ?>/dashboard.php">
+Dashboard
+</a>
 
 <?php if($role == "admin"){ ?>
 
-<a href="/blood-donation-management-system/admin/dashboard.php">Admin Dashboard</a>
-<a href="#">Manage Users</a>
-<a href="#">Blood Stock</a>
-<a href="#">All Requests</a>
+<a href="/blood-donation-management-system/admin/manage_users.php">Manage Users</a>
+
+<a href="/blood-donation-management-system/admin/blood_stock.php">Blood Stock</a>
+
+<a href="/blood-donation-management-system/admin/requests.php">All Requests</a>
 
 <?php } ?>
 
 <?php if($role == "donor"){ ?>
 
 <a href="/blood-donation-management-system/donor/dashboard.php">Dashboard</a>
+
 <a href="/blood-donation-management-system/donor/view_requests.php">Requests</a>
+
 <a href="/blood-donation-management-system/donor/history.php">Donation History</a>
 
 <?php } ?>
@@ -38,7 +45,9 @@ $role = $user['role'];
 <?php if($role == "receiver"){ ?>
 
 <a href="/blood-donation-management-system/receiver/dashboard.php">Dashboard</a>
+
 <a href="/blood-donation-management-system/receiver/request_blood.php">Request Blood</a>
+
 <a href="/blood-donation-management-system/receiver/my_requests.php">My Requests</a>
 
 <?php } ?>

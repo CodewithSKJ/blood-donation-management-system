@@ -6,8 +6,6 @@ if(!isset($_SESSION['user']) || $_SESSION['user']['role']!="receiver"){
     exit();
 }
 
-include("../includes/sidebar.php");
-
 $user=$_SESSION['user'];
 ?>
 

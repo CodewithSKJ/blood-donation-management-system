@@ -9,8 +9,7 @@ if($_SESSION['user']['role']!="receiver"){
 
 $receiver_id=$_SESSION['user']['id'];
 
-$requests=mysqli_query($conn,
-"SELECT * FROM blood_requests WHERE receiver_id='$receiver_id'");
+$requests=mysqli_query($conn,"SELECT * FROM requests WHERE receiver_id='$receiver_id'");
 ?>
 
 <h2>My Requests</h2>

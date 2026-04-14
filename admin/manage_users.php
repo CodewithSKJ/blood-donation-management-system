@@ -46,3 +46,19 @@ Delete
 </table>
 
 </div>
+<?php
+
+
+$result = mysqli_query($conn,"SELECT * FROM users");
+?>
+
+<h2>Manage Users</h2>
+
+<table border="1">
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Role</th>
+</tr>
+

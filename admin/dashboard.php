@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../includes/sidebar.php");
+
 if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "admin"){
     header("Location: ../auth/login.php");
     exit();
@@ -9,20 +9,20 @@ if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "admin"){
 include("../includes/config.php");
 include("../includes/sidebar.php");
 
-// Total Users
+/* Total Users */
 $user_query = mysqli_query($conn,"SELECT COUNT(*) AS total FROM users");
 $total_users = mysqli_fetch_assoc($user_query)['total'];
 
-// Total Requests
+/* Total Requests */
 $request_query = mysqli_query($conn,"SELECT COUNT(*) AS total FROM requests");
 $total_requests = mysqli_fetch_assoc($request_query)['total'];
 
-// Total Donations
+/* Total Donations */
 $donation_query = mysqli_query($conn,"SELECT COUNT(*) AS total FROM donations");
 $total_donations = mysqli_fetch_assoc($donation_query)['total'];
 
-// Blood Stock
-$stock_query = mysqli_query($conn,"SELECT SUM(units) AS total FROM bloodstock");
+/* Blood Stock */
+$stock_query = mysqli_query($conn,"SELECT SUM(units) AS total FROM blood_stock");
 $total_stock = mysqli_fetch_assoc($stock_query)['total'];
 ?>
 
