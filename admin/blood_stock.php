@@ -5,7 +5,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']['role']!="admin"){
     header("Location: ../auth/login.php");
     exit();
 }
-
+include("../includes/db.php");
 include("../includes/config.php");
 include("../includes/sidebar.php");
 
@@ -38,13 +38,13 @@ if(isset($_POST['add_stock'])){
 $stocks = mysqli_query($conn,"SELECT * FROM blood_stock");
 ?>
 
-<div class="main">
+<div class="admin-main">
 
 <h1>🩸 Blood Stock Management</h1>
 
-<!-- ADD STOCK FORM -->
-<div class="card">
+<div class="admin-content">
 
+<div class="admin-card">
 <form method="POST">
 
 <select name="blood_group" required>
@@ -64,13 +64,11 @@ $stocks = mysqli_query($conn,"SELECT * FROM blood_stock");
 <button name="add_stock">Add / Update</button>
 
 </form>
-
 </div>
 
-<!-- STOCK TABLE -->
-<div class="card">
+<div class="admin-card">
 
-<table class="table">
+<table class="admin-table">
 <tr>
 <th>Blood Group</th>
 <th>Units Available</th>
@@ -89,4 +87,5 @@ $stocks = mysqli_query($conn,"SELECT * FROM blood_stock");
 
 </div>
 
+</div>
 </div>

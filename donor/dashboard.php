@@ -1,5 +1,6 @@
 <?php 
 session_start();
+include("../includes/db.php");
 include("../includes/sidebar.php");
 if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "donor"){
     header("Location: ../auth/login.php");
@@ -15,8 +16,9 @@ $user = $_SESSION['user'];
 
 <h1>Welcome Donor 👋</h1>
 
-<p>Name: <?php echo $user['name']; ?></p>
-<p>Email: <?php echo $user['email']; ?></p>
+<p class="welcome">
+Welcome, <?php echo $user['name']; ?> 👋
+</p>
 
 <hr>
 
@@ -42,6 +44,5 @@ $user = $_SESSION['user'];
 
 </div>
 
-<a href="../auth/logout.php">Logout</a>
 
 </div>

@@ -10,8 +10,8 @@ if(!isset($_SESSION['user'])){
 
 $user = $_SESSION['user'];
 $role = $user['role'];
+include("../includes/db.php");
 ?>
-
 <link rel="stylesheet" href="/blood-donation-management-system/assets/css/style.css">
 
 <div class="sidebar">
@@ -34,7 +34,7 @@ Dashboard
 
 <?php if($role == "donor"){ ?>
 
-<a href="/blood-donation-management-system/donor/dashboard.php">Dashboard</a>
+
 
 <a href="/blood-donation-management-system/donor/view_requests.php">Requests</a>
 
@@ -44,7 +44,6 @@ Dashboard
 
 <?php if($role == "receiver"){ ?>
 
-<a href="/blood-donation-management-system/receiver/dashboard.php">Dashboard</a>
 
 <a href="/blood-donation-management-system/receiver/request_blood.php">Request Blood</a>
 

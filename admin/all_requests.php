@@ -5,7 +5,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']['role']!="admin"){
     header("Location: ../auth/login.php");
     exit();
 }
-
+include("../includes/db.php");
 include("../includes/config.php");
 include("../includes/sidebar.php");
 
@@ -17,14 +17,15 @@ ORDER BY requests.id DESC
 ");
 ?>
 
-<div class="main">
+<div class="admin-main">
 
 <h1>📋 All Blood Requests</h1>
 
-<div class="card">
+<div class="admin-content">
 
-<table class="table">
+<div class="admin-card">
 
+<table class="admin-table">
 <tr>
 <th>ID</th>
 <th>Receiver</th>
@@ -37,14 +38,12 @@ ORDER BY requests.id DESC
 <?php while($row=mysqli_fetch_assoc($requests)){ ?>
 
 <tr>
-
 <td><?php echo $row['id']; ?></td>
 <td><?php echo $row['name']; ?></td>
 <td><?php echo $row['blood_group']; ?></td>
 <td><?php echo $row['units']; ?></td>
 <td><?php echo $row['status']; ?></td>
 <td><?php echo $row['donor_id'] ?? "Not Assigned"; ?></td>
-
 </tr>
 
 <?php } ?>
@@ -53,4 +52,5 @@ ORDER BY requests.id DESC
 
 </div>
 
+</div>
 </div>

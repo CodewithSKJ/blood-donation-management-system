@@ -25,6 +25,60 @@ body{
     background:#34495e;
 }
 
+/* ===== DASHBOARD GLOBAL TEXT STYLE ===== */
+
+.main{
+    color:#2c3e50;        /* main dashboard text color */
+}
+
+.main h1{
+    color:#1a252f;
+    font-weight:700;
+}
+
+.main h2{
+    color:#34495e;
+}
+
+.main h3{
+    color:#2c3e50;
+}
+
+.main p{
+    color:#555;
+    font-size:16px;
+}
+
+/* Welcome text */
+.welcome{
+    color:#2980b9;
+    font-weight:600;
+}
+
+/* Card text */
+.card{
+    color:#2c3e50;
+}
+
+.card h3{
+    color:#1abc9c;
+}
+
+.card a{
+    color:white;
+    background:#3498db;
+    padding:6px 12px;
+    border-radius:5px;
+    text-decoration:none;
+}
+
+.card a:hover{
+    background:#2980b9;
+}
+body{
+    background:#f4f6f9;
+    font-family:Arial, sans-serif;
+}
 /* MAIN CONTENT */
 .main{
     margin-left:220px;
@@ -109,6 +163,129 @@ background:#e74c3c;
 color:white;
 padding:6px 12px;
 border-radius:5px;
+text-decoration:none;
+}
+
+.btn-delete:hover{
+background:#c0392b;
+}
+/* MAIN CONTENT */
+.main1{
+    margin-left:240px;
+    padding:30px;
+    background:#f4f6f9;
+    min-height:100vh;
+}
+
+/* CARD */
+.card1{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    max-width:500px;
+}
+
+/* FORM */
+input, select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#c0392b;
+}
+.page-title{
+font-size:28px;
+font-weight:bold;
+color:#2c3e50;
+margin-bottom:10px;
+}
+
+.welcome{
+font-size:18px;
+color:#555;
+margin-bottom:20px;
+}
+.cards{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+width:250px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+/* ADMIN PAGE MAIN AREA */
+.admin-main{
+margin-left:240px;
+padding:30px;
+background:#f1f5f9;
+min-height:100vh;
+}
+
+/* CONTENT GRID */
+.admin-content{
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+/* CARD */
+.admin-card{
+width:100%;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+overflow-x:auto;
+}
+
+/* TABLE */
+.admin-table{
+width:100%;
+border-collapse:collapse;
+}
+
+.admin-table th{
+background:#3498db;
+color:white;
+padding:12px;
+text-align:left;
+}
+
+.admin-table td{
+padding:12px;
+border-bottom:1px solid #eee;
+}
+
+/* DELETE BUTTON */
+.btn-delete{
+background:#e74c3c;
+color:white;
+padding:6px 12px;
+border-radius:6px;
 text-decoration:none;
 }
 

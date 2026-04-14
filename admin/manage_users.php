@@ -1,4 +1,5 @@
 <?php
+include("../includes/db.php");
 include("../includes/sidebar.php");
 include("../includes/config.php");
 
@@ -6,14 +7,15 @@ include("../includes/config.php");
 $users = mysqli_query($conn,"SELECT * FROM users");
 ?>
 
-<div class="main">
+<div class="admin-main">
 
 <h1>👥 Manage Users</h1>
 
-<div class="card">
+<div class="admin-content">
 
-<table class="table">
+<div class="admin-card">
 
+<table class="admin-table">
 <tr>
 <th>ID</th>
 <th>Name</th>
@@ -45,4 +47,5 @@ Delete
 
 </div>
 
+</div>
 </div>
