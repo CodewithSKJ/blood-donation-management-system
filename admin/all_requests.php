@@ -28,18 +28,18 @@ ORDER BY requests.id DESC
 <table class="admin-table">
 <tr>
 <th>ID</th>
-<th>Receiver</th>
+<th>Receiver_id</th>
 <th>Blood Group</th>
 <th>Units</th>
 <th>Status</th>
-<th>Donor</th>
+<th>Donor_id</th>
 </tr>
 
 <?php while($row=mysqli_fetch_assoc($requests)){ ?>
 
 <tr>
 <td><?php echo $row['id']; ?></td>
-<td><?php echo $row['name']; ?></td>
+<td><?php echo $row['receiver_id']; ?></td>
 <td><?php echo $row['blood_group']; ?></td>
 <td><?php echo $row['units']; ?></td>
 <td><?php echo $row['status']; ?></td>

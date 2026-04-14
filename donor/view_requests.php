@@ -18,7 +18,7 @@ if(isset($_GET['blood_group'])){
 }
 
 if($blood_group != ""){
-    $sql = "SELECT * FROM blood_requests 
+    $sql = "SELECT * FROM requests 
             WHERE status='pending' 
             AND blood_group='$blood_group'";
 } else {

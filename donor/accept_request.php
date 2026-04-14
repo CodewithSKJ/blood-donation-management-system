@@ -1,7 +1,10 @@
-<?php 
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
+
 include("../includes/db.php");
-include("../includes/config.php");
 include("../includes/auth_check.php");
 
 /* ROLE CHECK */
@@ -10,78 +13,66 @@ if($_SESSION['user']['role'] != "donor"){
     exit();
 }
 
+/* CHECK ID */
+if(!isset($_GET['id'])){
+    echo "Request ID missing";
+    exit();
+}
+
 $donor_id = $_SESSION['user']['id'];
 $request_id = $_GET['id'];
 
-
-/* ==============================
-   STEP 1 — GET REQUEST DATA
-================================*/
+/* STEP 1 — GET REQUEST */
 $getRequest = "SELECT * FROM requests 
 WHERE id='$request_id' AND status='pending'";
 
 $requestResult = mysqli_query($conn, $getRequest);
-$request = mysqli_fetch_assoc($requestResult);
 
-if(!$request){
-    echo "Invalid or already accepted request.";
+if(!$requestResult || mysqli_num_rows($requestResult) == 0){
+    echo "Request not found or already processed";
     exit();
 }
+
+$request = mysqli_fetch_assoc($requestResult);
 
 $blood_group = $request['blood_group'];
 $units = $request['units'];
 
-
-/* ==============================
-   STEP 2 — CHECK BLOOD STOCK
-================================*/
+/* STEP 2 — CHECK STOCK */
 $stockQuery = "SELECT * FROM blood_stock 
 WHERE blood_group='$blood_group'";
 
 $stockResult = mysqli_query($conn, $stockQuery);
-$stock = mysqli_fetch_assoc($stockResult);
 
-if(!$stock || $stock['units'] < $units){
-    echo "Not enough blood stock!";
+if(!$stockResult || mysqli_num_rows($stockResult) == 0){
+    echo "Stock not found";
     exit();
 }
 
+$stock = mysqli_fetch_assoc($stockResult);
 
-/* ==============================
-   STEP 3 — ACCEPT REQUEST
-================================*/
-$updateRequest = "UPDATE requests 
-SET status='accepted', donor_id='$donor_id' 
-WHERE id='$request_id'";
+if($stock['units'] < $units){
+    echo "Not enough blood stock";
+    exit();
+}
 
-mysqli_query($conn, $updateRequest);
+/* STEP 3 — ACCEPT REQUEST */
+mysqli_query($conn, "UPDATE requests 
+SET status='approved', donor_id='$donor_id' 
+WHERE id='$request_id'");
 
+/* STEP 4 — UPDATE STOCK */
+mysqli_query($conn, "UPDATE blood_stock 
+SET units = units - $units 
+WHERE blood_group='$blood_group'");
 
-/* ==============================
-   STEP 4 — AUTO DEDUCT STOCK 🔥
-================================*/
-$updateStock = "UPDATE blood_stock 
-SET units = units - '$units' 
-WHERE blood_group='$blood_group'";
-
-mysqli_query($conn, $updateStock);
-
-
-/* ==============================
-   STEP 5 — SAVE DONATION RECORD
-================================*/
-$insertDonation = "INSERT INTO donations 
+/* STEP 5 — INSERT DONATION */
+mysqli_query($conn, "INSERT INTO donations 
 (donor_id, request_id, blood_group, units, donation_date)
 VALUES 
-('$donor_id', '$request_id', '$blood_group', '$units', NOW())";
+('$donor_id', '$request_id', '$blood_group', '$units', NOW())");
 
-mysqli_query($conn, $insertDonation);
-
-
-/* ==============================
-   STEP 6 — REDIRECT
-================================*/
+/* STEP 6 — REDIRECT */
 header("Location: view_requests.php");
 exit();
-
 ?>
