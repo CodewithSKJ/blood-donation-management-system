@@ -12,7 +12,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "donor"){
 ?>
 <?php include("../includes/sidebar.php"); ?>
 
-<div style="margin-left:220px; padding:20px;">
+<div class="main">
 
 <h1>Welcome Donor 👋</h1>
 
