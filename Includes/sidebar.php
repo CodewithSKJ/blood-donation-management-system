@@ -28,7 +28,7 @@ Dashboard
 
 <a href="/blood-donation-management-system/admin/blood_stock.php">Blood Stock</a>
 
-<a href="/blood-donation-management-system/admin/requests.php">All Requests</a>
+<a href="/blood-donation-management-system/admin/all_requests.php">All Requests</a>
 
 <?php } ?>
 
