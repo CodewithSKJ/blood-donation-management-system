@@ -27,3 +27,34 @@ body{
     margin-left:220px;
     padding:20px;
 }
+/* Dashboard Cards */
+.cards{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    width:250px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    margin:0;
+    color:#333;
+}
+
+.card p{
+    font-size:22px;
+    font-weight:bold;
+    margin-top:10px;
+    color:#e74c3c;
+}

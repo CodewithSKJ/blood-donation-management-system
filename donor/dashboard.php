@@ -1,15 +1,14 @@
 <?php 
 session_start();
-include("../includes/auth_check.php");
-include("../includes/sidebar.php");
-
-$user = $_SESSION['user'];
 
 if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "donor"){
     header("Location: ../auth/login.php");
     exit();
 }
+
+$user = $_SESSION['user'];
 ?>
+
 <?php include("../includes/sidebar.php"); ?>
 
 <div class="main">
@@ -21,31 +20,28 @@ if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "donor"){
 
 <hr>
 
-<div style="display:flex; gap:20px; flex-wrap:wrap;">
+<div class="cards">
 
-<!-- REQUESTS CARD -->
-<a href="view_requests.php" style="text-decoration:none;">
-<div style="background:#3498db; color:white; padding:20px; width:200px; border-radius:10px; transition:0.3s;">
-    <h3>Requests</h3>
-    <p>View Blood Requests</p>
-</div>
-</a>
+    <div class="card">
+        <h3>Available Requests</h3>
+        <p>View</p>
+        <a href="view_requests.php">Open</a>
+    </div>
 
-<!-- DONATE CARD -->
-<a href="view_requests.php" style="text-decoration:none;">
-<div style="background:#2ecc71; color:white; padding:20px; width:200px; border-radius:10px; transition:0.3s;">
-    <h3>Donate</h3>
-    <p>Accept Requests</p>
-</div>
-</a>
+    <div class="card">
+        <h3>Donation History</h3>
+        <p>Check</p>
+        <a href="history.php">Open</a>
+    </div>
 
-<!-- HISTORY CARD -->
-<a href="history.php" style="text-decoration:none;">
-<div style="background:#9b59b6; color:white; padding:20px; width:200px; border-radius:10px; transition:0.3s;">
-    <h3>History</h3>
-    <p>Your Donations</p>
-</div>
-</a>
+    <div class="card">
+        <h3>Profile</h3>
+        <p>Update</p>
+        <a href="#">Coming Soon</a>
+    </div>
 
 </div>
+
 <a href="../auth/logout.php">Logout</a>
+
+</div>
