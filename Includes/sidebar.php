@@ -1,11 +1,50 @@
-<link rel="stylesheet" href="../assets/css/style.css">
-<div style="width:200px; height:100vh; background:#2c3e50; position:fixed; padding:20px; color:white;">
+<?php
+session_start();
+
+if(!isset($_SESSION['user'])){
+    header("Location: ../auth/login.php");
+    exit();
+}
+
+$user = $_SESSION['user'];
+$role = $user['role'];
+?>
+
+<link rel="stylesheet" href="/blood-donation-management-system/assets/css/style.css">
 
 <div class="sidebar">
-    <h2 style="text-align:center;">Blood Bank</h2>
 
-    <a href="../donor/dashboard.php">Dashboard</a>
-    <a href="../donor/view_requests.php">Requests</a>
-    <a href="../donor/history.php">History</a>
-    <a href="../auth/logout.php">Logout</a>
+<h2 style="text-align:center;">🩸 Blood Bank</h2>
+
+<a href="#">Dashboard</a>
+
+<?php if($role == "admin"){ ?>
+
+<a href="/blood-donation-management-system/admin/dashboard.php">Admin Dashboard</a>
+<a href="#">Manage Users</a>
+<a href="#">Blood Stock</a>
+<a href="#">All Requests</a>
+
+<?php } ?>
+
+<?php if($role == "donor"){ ?>
+
+<a href="/blood-donation-management-system/donor/dashboard.php">Dashboard</a>
+<a href="/blood-donation-management-system/donor/view_requests.php">Requests</a>
+<a href="/blood-donation-management-system/donor/history.php">Donation History</a>
+
+<?php } ?>
+
+<?php if($role == "receiver"){ ?>
+
+<a href="/blood-donation-management-system/receiver/dashboard.php">Dashboard</a>
+<a href="/blood-donation-management-system/receiver/request_blood.php">Request Blood</a>
+<a href="/blood-donation-management-system/receiver/my_requests.php">My Requests</a>
+
+<?php } ?>
+
+<hr>
+
+<a href="/blood-donation-management-system/auth/logout.php">Logout</a>
+
 </div>
