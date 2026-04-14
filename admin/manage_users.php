@@ -1,22 +1,19 @@
 <?php
-session_start();
-
-if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "admin"){
-    header("Location: ../auth/login.php");
-    exit();
-}
-
-include("../includes/config.php");
 include("../includes/sidebar.php");
-?>
-<?php
+include("../includes/config.php");
+
+/* GET ALL USERS */
 $users = mysqli_query($conn,"SELECT * FROM users");
 ?>
+
 <div class="main">
 
-<h1>Manage Users 👥</h1>
+<h1>👥 Manage Users</h1>
 
-<table border="1" cellpadding="10">
+<div class="card">
+
+<table class="table">
+
 <tr>
 <th>ID</th>
 <th>Name</th>
@@ -25,16 +22,17 @@ $users = mysqli_query($conn,"SELECT * FROM users");
 <th>Action</th>
 </tr>
 
-<?php while($row = mysqli_fetch_assoc($users)) { ?>
+<?php while($row = mysqli_fetch_assoc($users)){ ?>
 
 <tr>
 <td><?php echo $row['id']; ?></td>
 <td><?php echo $row['name']; ?></td>
 <td><?php echo $row['email']; ?></td>
-<td><?php echo $row['role']; ?></td>
+<td><?php echo ucfirst($row['role']); ?></td>
 
 <td>
-<a href="delete_user.php?id=<?php echo $row['id']; ?>">
+<a class="btn-delete"
+href="delete_user.php?id=<?php echo $row['id']; ?>">
 Delete
 </a>
 </td>
@@ -46,19 +44,5 @@ Delete
 </table>
 
 </div>
-<?php
 
-
-$result = mysqli_query($conn,"SELECT * FROM users");
-?>
-
-<h2>Manage Users</h2>
-
-<table border="1">
-<tr>
-<th>ID</th>
-<th>Name</th>
-<th>Email</th>
-<th>Role</th>
-</tr>
-
+</div>

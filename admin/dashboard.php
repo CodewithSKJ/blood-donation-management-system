@@ -1,29 +1,28 @@
 <?php
-session_start();
-
-if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "admin"){
-    header("Location: ../auth/login.php");
-    exit();
-}
-
-include("../includes/config.php");
 include("../includes/sidebar.php");
+include("../includes/config.php");
 
-/* Total Users */
-$user_query = mysqli_query($conn,"SELECT COUNT(*) AS total FROM users");
-$total_users = mysqli_fetch_assoc($user_query)['total'];
+/* COUNTS */
 
-/* Total Requests */
-$request_query = mysqli_query($conn,"SELECT COUNT(*) AS total FROM requests");
-$total_requests = mysqli_fetch_assoc($request_query)['total'];
+$total_users =
+mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM users")
+)['total'];
 
-/* Total Donations */
-$donation_query = mysqli_query($conn,"SELECT COUNT(*) AS total FROM donations");
-$total_donations = mysqli_fetch_assoc($donation_query)['total'];
+$total_requests =
+mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM requests")
+)['total'];
 
-/* Blood Stock */
-$stock_query = mysqli_query($conn,"SELECT SUM(units) AS total FROM blood_stock");
-$total_stock = mysqli_fetch_assoc($stock_query)['total'];
+$total_donations =
+mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM donations")
+)['total'];
+
+$total_stock =
+mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT SUM(units) AS total FROM blood_stock")
+)['total'];
 ?>
 
 <div class="main">
