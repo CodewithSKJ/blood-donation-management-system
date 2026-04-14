@@ -1,9 +1,27 @@
 <?php
 session_start();
-if($_SESSION['user']['role'] != "receiver"){
+
+if(!isset($_SESSION['user']) || $_SESSION['user']['role']!="receiver"){
     header("Location: ../auth/login.php");
+    exit();
 }
+
+include("../includes/sidebar.php");
+
+$user=$_SESSION['user'];
 ?>
 
-<h1>Receiver Dashboard</h1>
+<div class="main">
+
+<h1>Welcome Receiver 👋</h1>
+
+<p>Name: <?php echo $user['name']; ?></p>
+<p>Email: <?php echo $user['email']; ?></p>
+
+<hr>
+
+<a href="request_blood.php">Request Blood</a><br><br>
+<a href="my_requests.php">My Requests</a><br><br>
 <a href="../auth/logout.php">Logout</a>
+
+</div>

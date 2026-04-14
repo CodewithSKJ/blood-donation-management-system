@@ -2,43 +2,45 @@
 session_start();
 include("../includes/config.php");
 
-if(!isset($_SESSION['user']) || $_SESSION['user']['role'] != "receiver"){
+if($_SESSION['user']['role']!="receiver"){
     header("Location: ../auth/login.php");
     exit();
 }
 
+$receiver_id=$_SESSION['user']['id'];
+
 if(isset($_POST['request'])){
 
-$name = $_POST['name'];
-$blood_group = $_POST['blood_group'];
-$units = $_POST['units'];
-$hospital = $_POST['hospital'];
+$blood_group=$_POST['blood_group'];
+$units=$_POST['units'];
 
-$sql = "INSERT INTO blood_requests(receiver_name,blood_group,units,hospital,status)
-VALUES('$name','$blood_group','$units','$hospital','pending')";
+$query="INSERT INTO blood_requests
+(receiver_id,blood_group,units,status)
+VALUES('$receiver_id','$blood_group','$units','pending')";
 
-mysqli_query($conn,$sql);
+mysqli_query($conn,$query);
 
-echo "Blood Request Sent!";
+echo "Request Sent Successfully ✅";
 }
 ?>
 
 <h2>Request Blood</h2>
 
 <form method="POST">
-Name: <input type="text" name="name"><br><br>
 
-Blood Group:
-<select name="blood_group">
+<select name="blood_group" required>
 <option>A+</option>
+<option>A-</option>
 <option>B+</option>
+<option>B-</option>
 <option>O+</option>
+<option>O-</option>
 <option>AB+</option>
-</select><br><br>
+<option>AB-</option>
+</select>
 
-Units: <input type="number" name="units"><br><br>
+<input type="number" name="units" placeholder="Units Needed" required>
 
-Hospital: <input type="text" name="hospital"><br><br>
+<button name="request">Send Request</button>
 
-<button type="submit" name="request">Send Request</button>
 </form>
