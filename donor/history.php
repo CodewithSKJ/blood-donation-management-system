@@ -18,89 +18,116 @@ $result = mysqli_query($conn, $sql);
 <div class="donation-history-page">
 
 <style>
+
 /* ===== PAGE WRAPPER ===== */
 .donation-history-page {
     font-family: Arial, sans-serif;
-    background: #f4f6f9;
+
+    /* ⭐ Modern Medical Background */
+    background: linear-gradient(
+        135deg,
+        #fff5f5,
+        #fdeaea,
+        #fff0f0
+    );
+
     min-height: 100vh;
 }
 
-/* ===== CONTENT AREA (sidebar safe) ===== */
+/* ===== CONTENT AREA (Sidebar Safe) ===== */
 .donation-history-page .content-wrapper {
-    margin-left: 240px; /* adjust if sidebar differs */
-    padding: 20px;
+    margin-left:240px;
+    padding:30px;
+
+    background:white;
+    border-radius:12px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
 /* ===== TITLE ===== */
-.donation-history-page h1 {
-    text-align: center;
-    color: #c0392b;
-    margin-bottom: 20px;
+.donation-history-page h1{
+    text-align:center;
+    color:#c0392b;
+    margin-bottom:25px;
+    font-weight:600;
 }
 
 /* ===== TABLE WRAPPER ===== */
-.donation-history-page .table-container {
-    overflow-x: auto;
+.donation-history-page .table-container{
+    overflow-x:auto;
 }
 
 /* ===== TABLE ===== */
-.donation-history-page table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+.donation-history-page table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+
+    box-shadow:0 6px 18px rgba(192,57,43,0.15);
 }
 
-.donation-history-page th {
-    background: #c0392b;
-    color: white;
-    padding: 12px;
-    text-transform: uppercase;
-    font-size: 14px;
+/* ===== TABLE HEADER ===== */
+.donation-history-page th{
+    background:#c0392b;
+    color:white;
+    padding:14px;
+    text-transform:uppercase;
+    font-size:14px;
 }
 
-.donation-history-page td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #eee;
+/* ===== TABLE DATA ===== */
+.donation-history-page td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #eee;
 }
 
-.donation-history-page tr:hover {
-    background: #f9eaea;
+/* ===== ROW HOVER ===== */
+.donation-history-page tr:hover{
+    background:#fff3f3;
+    transition:0.3s;
 }
 
 /* ===== EMPTY STATE ===== */
-.donation-history-page .empty {
-    text-align: center;
-    padding: 20px;
-    color: #777;
+.donation-history-page .empty{
+    text-align:center;
+    padding:20px;
+    color:#777;
 }
 
 /* ===== BACK BUTTON ===== */
-.donation-history-page .back-btn {
-    display: block;
-    width: fit-content;
-    margin: 20px auto;
-    padding: 10px 15px;
-    background: #2c3e50;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
+.donation-history-page .back-btn{
+    display:block;
+    width:fit-content;
+    margin:25px auto;
+    padding:10px 18px;
+
+    background:#2c3e50;
+    color:white;
+
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
 }
 
-.donation-history-page .back-btn:hover {
-    background: #1a252f;
+.donation-history-page .back-btn:hover{
+    background:#1a252f;
+    transform:scale(1.05);
 }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .donation-history-page .content-wrapper {
-        margin-left: 0;
+@media (max-width:768px){
+    .donation-history-page .content-wrapper{
+        margin-left:0;
     }
 }
+
 </style>
+
 
 <div class="content-wrapper">
 
@@ -109,6 +136,7 @@ $result = mysqli_query($conn, $sql);
 <div class="table-container">
 
 <table>
+
 <tr>
     <th>ID</th>
     <th>Units Donated</th>

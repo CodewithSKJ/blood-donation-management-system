@@ -20,43 +20,53 @@ WHERE receiver_id='$user_id'
 <div class="my-requests-page">
 
 <style>
-/* ===== PAGE WRAPPER ===== */
-.my-requests-page {
-    font-family: Arial, sans-serif;
-    background: #f4f6f9;
-    min-height: 100vh;
-    padding: 20px;
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/* ===== FULL BACKGROUND (MODERN & SOFT) ===== */
+.my-requests-page {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    padding: 30px;
+
+    /* UNIQUE CLEAN GRADIENT (different from dashboard) */
+    background: linear-gradient(135deg, #f6d365, #fda085);
+}
 /* ===== TITLE ===== */
 .my-requests-page h1 {
     text-align: center;
-    color: #c0392b;
-    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 32px;
+    margin-bottom: 25px;
+    font-weight: bold;
 }
 
-/* ===== TABLE WRAPPER ===== */
+/* ===== TABLE CONTAINER ===== */
 .my-requests-page .table-box {
-    margin-left: 80px; /* sidebar space */
+    max-width: 1000px;
+    margin: auto;
     overflow-x: auto;
 }
 
-/* ===== TABLE ===== */
+/* ===== TABLE STYLE ===== */
 .my-requests-page table {
     width: 100%;
     border-collapse: collapse;
     background: white;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 /* HEADER */
 .my-requests-page th {
-    background: #c0392b;
+    background: #34495e;
     color: white;
-    padding: 14px;
-    text-transform: uppercase;
+    padding: 15px;
     font-size: 14px;
 }
 
@@ -64,12 +74,13 @@ WHERE receiver_id='$user_id'
 .my-requests-page td {
     padding: 14px;
     text-align: center;
+    color: #2c3e50;
     border-bottom: 1px solid #eee;
 }
 
 /* ROW HOVER */
 .my-requests-page tr:hover {
-    background: #fdf2f2;
+    background: #f2f6fa;
 }
 
 /* ===== STATUS BADGES ===== */
@@ -78,7 +89,6 @@ WHERE receiver_id='$user_id'
     border-radius: 20px;
     font-weight: bold;
     font-size: 13px;
-    display: inline-block;
 }
 
 /* COLORS */
@@ -97,10 +107,11 @@ WHERE receiver_id='$user_id'
     color: white;
 }
 
-/* ===== RESPONSIVE ===== */
+/* RESPONSIVE */
 @media (max-width: 768px) {
     .my-requests-page .table-box {
-        margin-left: 0;
+        width: 100%;
+        padding: 0 10px;
     }
 }
 </style>

@@ -1,0 +1,196 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ================= PAGE ================= */
+.register-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    padding: 40px;
+
+    background: #f3f4f6;
+    position: relative;
+    overflow: hidden;
+}
+
+/* soft background glow */
+.register-page::before {
+    content: "";
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    background: rgba(239, 68, 68, 0.06);
+    border-radius: 50%;
+    filter: blur(100px);
+    top: -120px;
+    left: -120px;
+}
+
+.register-page::after {
+    content: "";
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    background: rgba(59, 130, 246, 0.05);
+    border-radius: 50%;
+    filter: blur(100px);
+    bottom: -120px;
+    right: -120px;
+}
+
+/* ================= LEFT PANEL (PRO LEVEL) ================= */
+.left-info {
+    width: 420px;
+    z-index: 1;
+    color: #1f2937;
+}
+
+/* TITLE */
+.left-info h1 {
+    font-size: 35px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #0f172a;
+    margin-bottom: 14px;
+}
+
+/* DESCRIPTION */
+.left-info p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #475569;
+    max-width: 360px;
+}
+
+/* FEATURES CONTAINER */
+.points {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* FEATURE ITEM */
+.points div {
+    font-size: 14px;
+    color: #334155;
+
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.7);
+
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-radius: 10px;
+
+    backdrop-filter: blur(6px);
+
+    transition: 0.2s ease;
+}
+
+/* HOVER EFFECT */
+.points div:hover {
+    transform: translateX(4px);
+    border-color: #ef4444;
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.12);
+}
+
+/* ================= CARD (KEEP YOUR EXISTING STYLE) ================= */
+.register-card {
+    width: 380px;
+    padding: 32px;
+
+    background: #0f172a;
+    border-radius: 14px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+
+    z-index: 1;
+}
+
+/* ================= HEADER ================= */
+.logo, .header h2, .header p {
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+}
+
+/* ================= INPUTS ================= */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.15);
+
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+
+    outline: none;
+    transition: 0.2s;
+}
+
+input::placeholder {
+    color: rgba(255,255,255,0.4);
+}
+
+/* FOCUS */
+input:focus, select:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239,68,68,0.18);
+}
+
+/* ================= BUTTON ================= */
+button {
+    width: 100%;
+    padding: 12px;
+
+    background: #ef4444;
+    border: none;
+    border-radius: 10px;
+
+    color: white;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #dc2626;
+}
+
+/* ================= SWITCH ================= */
+.auth-switch {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+}
+
+.auth-switch a {
+    color: #ef4444;
+    font-weight: 600;
+    text-decoration: none;
+}
+select {
+    color: #fff;              /* selected text */
+    background-color: rgba(255,255,255,0.05);
+}
+
+/* dropdown options */
+select option {
+    background: #1f2937;     /* dark readable background */
+    color: #ffffff;          /* visible text */
+}

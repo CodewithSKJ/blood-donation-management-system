@@ -27,134 +27,175 @@ if($blood_group != ""){
 }
 $result = mysqli_query($conn, $sql);
 ?>
-<form method="GET">
-    <input type="text" name="blood_group" placeholder="Enter Blood Group (A+, O+, etc)">
-    <button type="submit">Search</button>
-</form>
 <div class="donor-requests-page">
 
 <style>
-/* ===== PAGE WRAPPER ===== */
-.donor-requests-page {
+
+/* ===== PAGE BACKGROUND ===== */
+.donor-requests-page{
     font-family: Arial, sans-serif;
-    background: #f4f6f9;
-    min-height: 100vh;
+
+    /* ⭐ NEW SOFT MEDICAL BACKGROUND */
+    background: linear-gradient(
+        135deg,
+        #fff6f6,
+        #fdeaea,
+        #fff1f1
+    );
+
+    min-height:100vh;
 }
 
-/* ===== MAIN CONTENT (for sidebar space) ===== */
-.donor-requests-page .content-wrapper {
-    margin-left: 240px; /* adjust if your sidebar width is different */
-    padding: 20px;
+/* ===== CONTENT WRAPPER ===== */
+.donor-requests-page .content-wrapper{
+    margin-left:240px;
+    padding:30px;
+
+    background:white;
+    border-radius:12px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
 /* ===== TITLE ===== */
-.donor-requests-page h1 {
-    text-align: center;
-    color: #c0392b;
-    margin-bottom: 20px;
+.donor-requests-page h1{
+    text-align:center;
+    color:#c0392b;
+    margin-bottom:25px;
 }
 
 /* ===== SEARCH BOX ===== */
-.donor-requests-page form {
-    text-align: center;
-    margin-bottom: 20px;
+.donor-requests-page form{
+    text-align:center;
+    margin-bottom:25px;
 }
 
-.donor-requests-page form input {
-    padding: 10px;
-    width: 250px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+.donor-requests-page form input{
+    padding:10px;
+    width:260px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    outline:none;
 }
 
-.donor-requests-page form button {
-    padding: 10px 15px;
-    background: #c0392b;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+.donor-requests-page form input:focus{
+    border-color:#c0392b;
 }
 
-.donor-requests-page form button:hover {
-    background: #a93226;
+/* SEARCH BUTTON */
+.donor-requests-page form button{
+    padding:10px 18px;
+    background:#c0392b;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.donor-requests-page form button:hover{
+    background:#a93226;
+    transform:scale(1.05);
+}
+
+/* ===== TABLE WRAPPER ===== */
+.donor-requests-page .table-container{
+    overflow-x:auto;
 }
 
 /* ===== TABLE ===== */
-.donor-requests-page table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+.donor-requests-page table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+
+    box-shadow:0 6px 18px rgba(192,57,43,0.15);
 }
 
-/* FIX: prevent layout breaking */
-.donor-requests-page .table-container {
-    overflow-x: auto;
+/* ===== TABLE HEADER ===== */
+.donor-requests-page th{
+    background:#c0392b;
+    color:white;
+    padding:14px;
 }
 
-.donor-requests-page th {
-    background: #c0392b;
-    color: white;
-    padding: 12px;
+/* ===== TABLE DATA ===== */
+.donor-requests-page td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #eee;
 }
 
-.donor-requests-page td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #eee;
-}
-
-.donor-requests-page tr:hover {
-    background: #f9eaea;
+/* ROW HOVER */
+.donor-requests-page tr:hover{
+    background:#fff3f3;
+    transition:0.3s;
 }
 
 /* ===== ACTION BUTTONS ===== */
-.donor-requests-page a {
-    text-decoration: none;
-    padding: 6px 10px;
-    border-radius: 5px;
-    color: white;
-    font-size: 14px;
+.donor-requests-page a{
+    text-decoration:none;
+    padding:7px 12px;
+    border-radius:6px;
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    transition:0.3s;
 }
 
-.donor-requests-page a[href*="accept"] {
-    background: #27ae60;
+/* ACCEPT */
+.donor-requests-page a[href*="accept"]{
+    background:#27ae60;
 }
 
-.donor-requests-page a[href*="reject"] {
-    background: #e74c3c;
+.donor-requests-page a[href*="accept"]:hover{
+    background:#1e8449;
+    transform:scale(1.05);
 }
 
-.donor-requests-page a:hover {
-    opacity: 0.85;
+/* REJECT */
+.donor-requests-page a[href*="reject"]{
+    background:#e74c3c;
+}
+
+.donor-requests-page a[href*="reject"]:hover{
+    background:#c0392b;
+    transform:scale(1.05);
 }
 
 /* ===== BACK BUTTON ===== */
-.donor-requests-page .back-btn {
-    display: block;
-    width: fit-content;
-    margin: 20px auto;
-    padding: 10px 15px;
-    background: #2c3e50;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
+.donor-requests-page .back-btn{
+    display:block;
+    width:fit-content;
+    margin:25px auto;
+    padding:10px 18px;
+
+    background:#2c3e50;
+    color:white;
+
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
 }
 
-.donor-requests-page .back-btn:hover {
-    background: #1a252f;
+.donor-requests-page .back-btn:hover{
+    background:#1a252f;
+    transform:scale(1.05);
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .donor-requests-page .content-wrapper {
-        margin-left: 0;
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+    .donor-requests-page .content-wrapper{
+        margin-left:0;
     }
 }
+
 </style>
+
 
 <div class="content-wrapper">
 
@@ -166,10 +207,11 @@ $result = mysqli_query($conn, $sql);
     <button type="submit">Search</button>
 </form>
 
-<!-- TABLE WRAPPER -->
+<!-- TABLE -->
 <div class="table-container">
 
 <table>
+
 <tr>
     <th>ID</th>
     <th>Receiver ID</th>
@@ -188,7 +230,7 @@ $result = mysqli_query($conn, $sql);
     <td><?php echo $row['status']; ?></td>
 
     <td>
-    <?php if($row['status'] == "pending"){ ?>
+    <?php if($row['status']=="pending"){ ?>
         <a href="accept_request.php?id=<?php echo $row['id']; ?>">Accept</a>
         |
         <a href="reject_request.php?id=<?php echo $row['id']; ?>">Reject</a>

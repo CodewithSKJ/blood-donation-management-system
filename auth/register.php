@@ -8,7 +8,12 @@ if(isset($_POST['register'])){
     $email = $_POST['email'];
     $password = $_POST['password'];
     $role = $_POST['role'];
+// allow only these two roles
+$allowed_roles = ["donor", "receiver"];
 
+if (!in_array($role, $allowed_roles)) {
+    die("Invalid role selected");
+}
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $check = $conn->prepare("SELECT id FROM users WHERE email=?");
@@ -29,95 +34,66 @@ exit();
     }
 }
 ?>
+<!DOCTYPE html>
+<html>
 
-<div class="register-page">
+<head>
+    <title>Login</title>
 
-<style>
-.register-page {
-    font-family: Arial;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   <link rel="stylesheet" href="/blood-donation-management-system/assets/css/register.css">
+</head>
 
-    /* Modern gradient background */
-    background: linear-gradient(-45deg, #c0392b, #8e44ad, #2980b9, #16a085);
-    background-size: 400% 400%;
-    animation: gradientBG 8s ease infinite;
-}
+<body>
+    <div class="register-page">
 
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-.register-box {
-    background: white;
-    padding: 30px;
-    width: 350px;
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
+    <div class="left-info">
+        <h1>Blood Donation System</h1>
+        <p>
+            A secure platform connecting donors, hospitals, and patients
+            for fast and reliable blood availability.
+        </p>
 
-.register-box h2 {
-    text-align: center;
-    color: #c0392b;
-    margin-bottom: 20px;
-}
+        <div class="points">
+            <div>✔ Verified Donors</div>
+            <div>✔ Emergency Requests</div>
+            <div>✔ Hospital Network</div>
+            <div>✔ 24/7 Availability</div>
+        </div>
+    </div>
 
-.register-box input,
-.register-box select {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
+    <div class="register-card">
 
-.register-box button {
-    width: 100%;
-    padding: 10px;
-    background: #c0392b;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
+        <div class="header">
+            <div class="logo">Create Account</div>
+            <h2>Register</h2>
+            <p>Join the healthcare network</p>
+        </div>
 
-.register-box button:hover {
-    background: #a93226;
-}
+        <form method="POST">
 
-.msg {
-    text-align: center;
-    margin-bottom: 10px;
-    color: green;
-    font-weight: bold;
-}
-</style>
+            <input type="text" name="name" placeholder="Full Name" required>
 
-<div class="register-box">
+            <input type="email" name="email" placeholder="Email Address" required>
 
-<h2>🩸 Register</h2>
+            <input type="password" name="password" placeholder="Password" required>
 
-<?php if(isset($msg)) echo "<div class='msg'>$msg</div>"; ?>
+            <select name="role" required>
+                <option value="">Select Role</option>
+                <option value="donor">Donor</option>
+                <option value="receiver">Receiver</option>
+            </select>
 
-<form method="POST">
-    <input type="text" name="name" placeholder="Full Name" required>
+            <button type="submit">Create Account</button>
 
-    <input type="email" name="email" placeholder="Email Address" required>
+        </form>
 
-    <input type="password" name="password" placeholder="Password" required>
+        <div class="auth-switch">
+            Already have an account?
+            <a href="login.php">Login</a>
+        </div>
 
-    <select name="role" required>
-        <option value="">Select Role</option>
-        <option value="donor">Donor</option>
-        <option value="receiver">Receiver</option>
-        <option value="admin">Admin</option>
-    </select>
-
-    <button type="submit" name="register">Create Account</button>
-</form>
+    </div>
 
 </div>
-</div>
+</body>
+</html>
